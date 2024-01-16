@@ -60,8 +60,8 @@ DisplayOff_list = ["Turn off",
 root = tk.Tk()
 screen_width = root.winfo_screenwidth()
 screen_height = root.winfo_screenheight()
-#screen_width = 400
-#screen_height = 300
+#screen_width = x
+#screen_height = y
 root['bg'] = 'black'
 root.geometry(f"{screen_width}x{screen_height}+0+0")
 root.overrideredirect(True)
