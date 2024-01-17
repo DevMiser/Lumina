@@ -1,4 +1,4 @@
-Note - A pdf of the following intructions are on this repository.
+Note - A pdf of the following intructions are in this repository.
 
 If you download the Lumina Insructions.pdf file, the hyperlinks will be active on that document.
 
