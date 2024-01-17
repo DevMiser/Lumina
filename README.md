@@ -1,6 +1,6 @@
 Note - A pdf of the following intructions are in this repository.
 
-If you download the Lumina Insructions.pdf file, the hyperlinks will be active on that document.
+If you download the Lumina Insructions.pdf file, the hyperlinks will be active in that document.
 
 <img width="627" alt="1" src="https://github.com/DevMiser/Lumina/assets/22980908/a8f69dec-720c-4969-98b2-64f045d0d037">
 
