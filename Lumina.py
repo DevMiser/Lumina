@@ -39,6 +39,8 @@ recorder = None
 global text_var
 global screen_width, screen_height
 
+count = 0
+
 CloseProgram_list = ["Close program",
     "End program",
     "Exit program",
@@ -203,7 +205,33 @@ def listen():
             listen_audio_stream.close()
             cobra.delete()
             break
- 
+
+def display_logo():
+    global image_window
+    global screen_width, screen_height
+    image_window = tk.Toplevel(root)
+    image_window.title("Image Window")
+    image_window.geometry(f"{screen_width}x{screen_height}+0+0")
+    image_window.attributes("-fullscreen", True)
+    image_window.overrideredirect(True)
+    image_window.configure (bg='black')
+    image = Image.open("/home/pi/Lumina/Lumina Logo.png")
+    # Calculate the scaling factor based on the original image size and the screen size
+    original_width, original_height = image.size
+    scale = max(screen_width / original_width, screen_height / original_height)
+    # Resize the image with the scaled dimensions
+    scaled_width = int(original_width * scale)
+    scaled_height = int(original_height * scale)
+    image = image.resize((scaled_width, scaled_height)) 
+    image_photo = ImageTk.PhotoImage(image)
+    image_canvas = tk.Canvas(image_window, bg='#000000', width=screen_width, height=screen_height)
+    # Center the image on the screen
+    x = (screen_width - scaled_width) // 2
+    y = (screen_height - scaled_height) // 2
+    image_canvas.create_image(x, y, image=image_photo, anchor=tk.NW)
+    image_canvas.pack()
+    image_window.update()
+
 def on_message (transcript, DisplayOn_list, DisplayOff_list, CloseProgram_list):
 
     words = transcript.split(',')
@@ -233,6 +261,7 @@ def text_window_func():
     text_window.update()
 
 def update_image(image_url):
+    global image_window 
     global screen_width, screen_height
     image_window = tk.Toplevel(root)
     image_window.title("Image Window")
@@ -242,16 +271,13 @@ def update_image(image_url):
     image_window.configure (bg='black') 
     raw_data = urllib.request.urlopen(image_url).read()
     image = Image.open(io.BytesIO(raw_data))
-    # Calculate the scaling factor based on the original image size and the screen size
     original_width, original_height = image.size
     scale = max(screen_width / original_width, screen_height / original_height)
-    # Resize the image with the scaled dimensions
     scaled_width = int(original_width * scale)
     scaled_height = int(original_height * scale)
     image = image.resize((scaled_width, scaled_height)) 
     image_photo = ImageTk.PhotoImage(image)
     image_canvas = tk.Canvas(image_window, bg='#000000', width=screen_width, height=screen_height)
-    # Center the image on the screen
     x = (screen_width - scaled_width) // 2
     y = (screen_height - scaled_height) // 2
     image_canvas.create_image(x, y, image=image_photo, anchor=tk.NW)
@@ -260,9 +286,9 @@ def update_image(image_url):
 
 def wake_word():
 
-    porcupine = pvporcupine.create(keywords=["computer", "jarvis", "Lumina",],
+    porcupine = pvporcupine.create(keywords=["Lumina",],
                             access_key=pv_access_key,
-                            sensitivities=[0.1, 0.1, 0.1], #from 0 to 1.0 - a higher number reduces the miss rate at the cost of increased false alarms
+                            sensitivities=[0.1], #from 0 to 1.0 - a higher number reduces the miss rate at the cost of increased false alarms
                                    )
     devnull = os.open(os.devnull, os.O_WRONLY)
     old_stderr = os.dup(2)
@@ -332,11 +358,18 @@ try:
     o = create(
         access_key=pv_access_key,
         )
+    
+    count = 0
 
     while True:
      
         try:
-
+            
+            if count == 0:
+                display_logo()
+            else:
+                pass
+            count = 1
             recorder = Recorder()
             wake_word()
             text_window_func()
@@ -390,6 +423,4 @@ try:
             break
 
 except KeyboardInterrupt:
-    print ("\nExiting Lumina")
-
-
+    sys.exit("\nExiting Lumina")
