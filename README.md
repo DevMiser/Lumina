@@ -12,10 +12,12 @@ If you download the Lumina Insructions.pdf file, the hyperlinks will be active i
 
 <img width="617" alt="5" src="https://github.com/DevMiser/Lumina/assets/22980908/8eca89f0-535e-4e17-b075-30a2695ac9ba">
 
-<img width="608" alt="6" src="https://github.com/DevMiser/Lumina/assets/22980908/4eb3b911-7705-4000-8420-fc0a4b4e5fc1">
+<img width="605" alt="6" src="https://github.com/DevMiser/Lumina/assets/22980908/dbc59757-c85b-474a-8858-0210db53b74e">
 
-<img width="620" alt="7" src="https://github.com/DevMiser/Lumina/assets/22980908/fe6cf2d9-9de5-40cd-8c32-0066ad6da0cd">
+<img width="613" alt="7" src="https://github.com/DevMiser/Lumina/assets/22980908/a0d5c568-abb4-4798-97a5-c75b62f46d21">
 
 <img width="635" alt="8" src="https://github.com/DevMiser/Lumina/assets/22980908/950228c5-5b26-410f-92b7-c34068c0475b">
 
 <img width="612" alt="9" src="https://github.com/DevMiser/Lumina/assets/22980908/b20d8171-df46-4297-b868-980cbe3b5887">
+
+<img width="619" alt="10" src="https://github.com/DevMiser/Lumina/assets/22980908/18a18f43-3566-4021-b823-844b51cac9b0">
