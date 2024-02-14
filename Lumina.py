@@ -44,7 +44,7 @@ count = 0
 CloseProgram_list = ["Close program",
     "End program",
     "Exit program",
-    "Stop program"
+    "Stop program",
     "Close the program",
     "End the program",
     "Exit the program",
