@@ -75,8 +75,8 @@ Save_list = ["Save",
 root = tk.Tk()
 screen_width = root.winfo_screenwidth()
 screen_height = root.winfo_screenheight()
-#screen_width = 960
-#screen_height = 600
+#screen_width = x
+#screen_height = y
 root['bg'] = 'black'
 root.geometry(f"{screen_width}x{screen_height}+0+0")
 root.overrideredirect(True)
