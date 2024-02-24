@@ -2,7 +2,7 @@ Note - A pdf of the following intructions are in this repository.
 
 If you download the Lumina Instructions.pdf file, the hyperlinks will be active in that document.
 
-Feb. 23, 2024 Update - Lumina can now also save generated images by voice command.  If you want to save the generated image shown on your TV, say “Lumina” and when the screen displays “Listening”, say “Save it” or “Keep it”.
+Feb. 23, 2024 Update - Lumina can now also save your generated images by voice command.  If you want to save the generated image shown on your TV, say “Lumina” and when the screen displays “Listening”, say “Save it” or “Keep it”.
 
 Lumina will then save your current image in the /home/pi/Lumina folder as a PNG file labeled with the phrase you used to generate it (thank you to azwirko for that idea) and the date.  Lumina will display the name of the file for 3 seconds and then revert to displaying the image.
 
