@@ -48,7 +48,8 @@ CloseProgram_list = ["Close program",
     "Close the program",
     "End the program",
     "Exit the program",
-    "Stop the program"
+    "Stop the program",
+    "Exit"
     ]
 
 DisplayOn_list = ["Turn on",
@@ -59,11 +60,23 @@ DisplayOff_list = ["Turn off",
     "Sleep"
     ]
 
+Save_list = ["Save",
+    "Keep",
+    "Save it",
+    "Keep it",
+    "Save image",
+    "Keep image",
+    "Save the image",
+    "Keep the image",
+    "Save that image",
+    "Keep that image"
+    ]
+
 root = tk.Tk()
 screen_width = root.winfo_screenwidth()
 screen_height = root.winfo_screenheight()
-#screen_width = x
-#screen_height = y
+#screen_width = 960
+#screen_height = 600
 root['bg'] = 'black'
 root.geometry(f"{screen_width}x{screen_height}+0+0")
 root.overrideredirect(True)
@@ -99,6 +112,7 @@ def dall_e3(prompt):
         prompt=prompt,
         size="1792x1024",
         quality="standard",
+#        quality="hd",
         n=1,
     )
     return (response.data[0].url)
@@ -232,7 +246,7 @@ def display_logo():
     image_canvas.pack()
     image_window.update()
 
-def on_message (transcript, DisplayOn_list, DisplayOff_list, CloseProgram_list):
+def on_message (transcript, DisplayOn_list, DisplayOff_list, CloseProgram_list, Save_list):
 
     words = transcript.split(',')
     for word in words:
@@ -242,8 +256,46 @@ def on_message (transcript, DisplayOn_list, DisplayOff_list, CloseProgram_list):
             display_on(transcript)
         elif word in DisplayOff_list:
             display_off(transcript)
+        elif word in Save_list:
+            save_image(image_label) 
         else:
             draw_request(transcript)
+
+def save_image(image_label):       
+    global text_var
+    global text_window
+    global image
+    global image_window 
+    global screen_width, screen_height
+    timestamp = datetime.datetime.now().strftime("%m-%d-%Y")
+    saved_images_path = "/home/pi/Lumina/"
+    output_filename = f"{saved_images_path}{image_label}_{timestamp}.png"
+    image.save(output_filename, format="PNG")
+    save_message = (f"Image saved as\n\n" + output_filename)
+    print(save_message)
+    wrapped_save_message = textwrap.fill(save_message, width=60)
+    text_var.set(wrapped_save_message)
+    text_window.update()
+    sleep(3)
+    image_window = tk.Toplevel(root)
+    image_window.title("Image Window")
+    image_window.geometry(f"{screen_width}x{screen_height}+0+0")
+    image_window.attributes("-fullscreen", True)
+    image_window.overrideredirect(True)
+    image_window.configure (bg='black') 
+    image = image
+    original_width, original_height = image.size
+    scale = max(screen_width / original_width, screen_height / original_height)
+    scaled_width = int(original_width * scale)
+    scaled_height = int(original_height * scale)
+    image = image.resize((scaled_width, scaled_height)) 
+    image_photo = ImageTk.PhotoImage(image)
+    image_canvas = tk.Canvas(image_window, bg='#000000', width=screen_width, height=screen_height)
+    x = (screen_width - scaled_width) // 2
+    y = (screen_height - scaled_height) // 2
+    image_canvas.create_image(x, y, image=image_photo, anchor=tk.NW)
+    image_canvas.pack()
+    image_window.update()
 
 def text_window_func():
     global text_var
@@ -261,6 +313,7 @@ def text_window_func():
     text_window.update()
 
 def update_image(image_url):
+    global image
     global image_window 
     global screen_width, screen_height
     image_window = tk.Toplevel(root)
@@ -380,7 +433,8 @@ try:
             transcript, words = o.process(recorder.stop())
             recorder.stop()
             print("You said: " + transcript)
-            on_message(transcript, DisplayOn_list, DisplayOff_list, CloseProgram_list) 
+            on_message(transcript, DisplayOn_list, DisplayOff_list, CloseProgram_list, Save_list) 
+            image_label = transcript.replace(" ","_")
             recorder.stop()
             o.delete
             recorder = None
@@ -424,3 +478,6 @@ try:
 
 except KeyboardInterrupt:
     sys.exit("\nExiting Lumina")
+
+
+
