@@ -24,5 +24,4 @@ Lumina will then save your current image in the /home/pi/Lumina folder as a PNG 
 
 <img width="612" alt="9" src="https://github.com/DevMiser/Lumina/assets/22980908/b20d8171-df46-4297-b868-980cbe3b5887">
 
-<img width="593" alt="10" src="https://github.com/DevMiser/Lumina/assets/22980908/287a6e45-44a3-4dfb-96f5-484e800c7182">
-
+<img width="624" alt="10" src="https://github.com/DevMiser/Lumina/assets/22980908/80a1bfed-27e5-4811-a6e9-ae2d1723a9eb">
